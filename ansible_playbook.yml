@@ -1,0 +1,11 @@
+---
+- name: "Ansible Playbook"
+  hosts: all
+  tasks:
+    - name: "Define new variable"
+      set_fact:
+        testvar01: "Random Content"
+    - name: "Debug var"
+      debug:
+        var: testvar01
+...
