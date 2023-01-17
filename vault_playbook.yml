@@ -1,0 +1,16 @@
+---
+- name: "Vault Playbook"
+  hosts: myinstance
+  remote_user: andre
+  become: yes
+  vars_files:
+    - vars/vault_vars.yml
+  tasks:
+    - name: "Generate hash password"
+      set_fact:
+        new_hash_pass: "{{ new_user_pass | password_hash('sha512', new_user_secret) }}"
+    - name: "Create new user"
+      user:
+        name: "{{ new_user_name }}"
+        password: "{{ new_hash_pass }}"
+...

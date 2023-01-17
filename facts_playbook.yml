@@ -1,0 +1,26 @@
+---
+- name: "Facts Playbook"
+  hosts: all
+  remote_user: andre
+  become: yes
+  tasks:
+    - name: "Create folder /etc/ansible/facts.d"
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+    - name: "Create file custom.fact in previous directory"
+      ini_file:
+        path: "/etc/ansible/facts.d/custom.fact"
+        section: haproxy
+        option: haproxy_ip
+        value: "{{ ansible_default_ipv4.address }}"
+    - name: "Print local facts haproxy_ip"
+      debug:
+        var: ansible_local.custom.haproxy.haproxy_ip
+    - name: "Create variable life_variable"
+      set_fact:
+        life_variable: "{{ ansible_date_time.date }}"
+    - name: ""
+      debug:
+        var: life_variable
+...

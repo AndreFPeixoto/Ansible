@@ -1,0 +1,63 @@
+---
+- name: "Tools Playbook"
+  hosts: myinstance
+  remote_user: andre
+  become: yes
+  vars:
+    - mysql_user: testuser01
+    - mysql_pass: password01
+    - mysql_db:
+      - testdb01
+      - testdb02
+    - mysql_client_ip: 192.168.1.202
+    - mysql_packages:
+      - mariadb-server
+      - python3-pymysql
+  tasks:
+    - name: "Install packages"
+      apt:
+        name: "{{ package }}"
+        state: latest
+      loop: "{{ mysql_packages }}"
+      loop_control:
+        loop_var: package
+      register: operation
+    - name: "Start mariadb"
+      systemd:
+        name: mariadb
+        state: started
+        masked: no
+      when: operation is changed
+    - name: "Restart mariadb"
+      systemd:
+        name: mariadb
+        state: restarted
+        masked: no
+      when: operation is not changed~
+# Here is the solution https://stackoverflow.com/questions/63433445/ansible-access-denied-for-rootlocalhost-error
+    - name: "Create mysql databases"
+      mysql_db:
+        name: "{{ mysql_db }}"
+        state: present
+    - name: "Create new mysql user"
+      mysql_user:
+        state: present
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_pass }}"
+        host: "{{ mysql_client_ip }}"
+        priv: "{{ db }}.*": "READ,WRITE"
+      loop: "{{ mysql_db }}"
+      loop_control:
+        loop_var: db
+    - name: "Import usertable into databases"
+      become: no
+      mysql_db:
+        state: import
+        name: "{{ mysql_db }}"
+        encoding: utf8
+        target: "/home/{{ ansible_user }}/usertable.mysql"
+        login_host: "{{ ansible_host }}"
+        login_user: "{{ mysql_user }}"
+        login_pass: "{{ mysql_pass }}"
+      delegate_to: "{{ mysql_client_ip }}"
+...

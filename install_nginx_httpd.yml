@@ -1,0 +1,27 @@
+---
+- hosts: fedora
+  remote_user: andre
+  become: yes
+  become_user: root
+  tasks:
+  - name: "Install Nginx"
+    yum:
+      name: nginx
+      state: latest
+  - name: "Install Httpd"
+    yum:
+      name: httpd
+      state: latest
+    notify:
+    - stop apache
+    - restart nginx
+  handlers:
+    - name: stop apache
+      systemd:
+        name: httpd
+        state: stopped
+    - name: restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+...

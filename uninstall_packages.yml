@@ -1,0 +1,21 @@
+---
+- hosts: fedora
+  remote_user: andre
+  become: yes
+  become_user: root
+  tasks:
+  - name: "Remove Packages"
+    yum:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+        - httpd
+        - httpd-filesystem
+        - httpd-tools
+        - httpd-core
+        - nginx
+        - nginx-filesystem
+        - nginx-mimetypes
+        - nginx-core
+...

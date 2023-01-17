@@ -1,0 +1,25 @@
+---
+- hosts: all
+  remote_user: andre
+  become: yes
+  become_user: root
+  tasks:
+    - name: "Print 'It is working'"
+      debug:
+        msg: "It is working"
+    - name: "Print Instance Settings"
+      setup:
+    - name: "Create New User 'john'"
+      user:
+        name: "john"
+        password: "johndoe"
+    - name: "Install Apache"
+      apt:
+        pkg: apache2
+        state: latest
+    - name: "Enable and Up Apache Service"
+      systemd:
+        name: apache2
+        state: started
+        enabled: yes
+...
