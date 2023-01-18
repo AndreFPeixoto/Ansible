@@ -1,6 +1,6 @@
 ---
 - name: "Ansible Playbook"
-  hosts: Linux_VMs
+  hosts: all
   tasks:
     - name: "Define new variable"
       set_fact:

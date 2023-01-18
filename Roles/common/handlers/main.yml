@@ -1,0 +1,6 @@
+---
+
+- name: "Notify Post Reboot"
+  debug:
+    msg: "{{ ansible_hostname }} Rebooted"
+...
