@@ -6,5 +6,5 @@
       ping:
       register: output
     - debug:
-        msg: "{{ output.stdout }}"
+        msg: "{{ output.stdout_lines }}"
 ...
