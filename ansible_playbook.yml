@@ -1,7 +1,9 @@
 ---
 - name: "Ansible Playbook"
-  hosts: all
+  hosts: linux_hosts
   tasks:
+    - name: "Test Ping"
+      ping:
     - name: "Define new variable"
       set_fact:
         testvar01: "Random Content"
