@@ -1,0 +1,6 @@
+---
+- name: "Run On Windows"
+  hosts: windows_hosts
+  roles:
+    - win
+...

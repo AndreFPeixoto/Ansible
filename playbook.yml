@@ -1,6 +1,6 @@
 ---
 - name: "Default Playbook - Using Roles"
-  hosts: my_servers
+  hosts: all
   roles:
     - common
 ...
