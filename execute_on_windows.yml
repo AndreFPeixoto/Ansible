@@ -1,6 +1,32 @@
 ---
 - name: "Run On Windows"
   hosts: windows_hosts
-  roles:
-    - win
+  tasks:
+    - name: "Add User"
+      win_domain_user:
+        name: alpha
+        firstname: Alpha
+        surname: Romeo
+        company: Kyntech Services
+        password: PassW0rd123
+        state: present
+        groups:
+          - Domain Admins
+
+    - name: "Install Chocolatey"
+      win_shell: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+    - name: "Disable Enhanced Exit Codes"
+      win_chocolatey_feature:
+        name: useEnhancedExitCodes
+        state: disabled
+
+    - name: "Install Software"
+      win_chocolatey:
+        name: "{{ item }}"
+        state: latest
+      loop: 
+        - git
+        - firefox
+        - putty  
 ...
