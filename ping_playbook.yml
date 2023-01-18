@@ -2,10 +2,10 @@
 - name: "Ansible Playbook"
   hosts: all
   tasks:
-    - name: "Test Ping"
+    - name: "Test Ping On Linux"
       ping:
       when: ansible_facts['system'] == "Linux"
-    - name: "Test Ping"
+    - name: "Test Ping on Windows"
       win_ping:
       when: ansible_facts['os_family'] == "Windows"
 ...
