@@ -1,0 +1,10 @@
+---
+- name: "Ansible Playbook"
+  hosts: linux_hosts
+  tasks:
+    - name: "Test Ping"
+      ping:
+      register: output
+      debug:
+        var: output.stdout
+...
