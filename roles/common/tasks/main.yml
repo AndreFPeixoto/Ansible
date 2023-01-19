@@ -1,0 +1,58 @@
+---
+
+# Update RedHat Distribution
+- name: "Update RedHat Like Distribution"
+  yum:
+    name: "*"
+    state: latest
+    security: yes
+    update_cache: yes
+  when: ansible_distribution == "Fedora" or ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+
+# Update Debian Distribution
+- name: "Update Debian Like Distribution"
+  apt:
+    upgrade: yes
+    update_cache: yes
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+# Install Packages
+- name: "Install Packages"
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+      - net-tools
+      - vim
+      - nmap
+  when: ansible_distribution == "Fedora" or ansible_distribution == "CentOS" or ansible_distribution == "RedHat"
+
+# Configure Timezone
+- name: "Configure Timezone"
+  file:
+    src: /usr/share/zoneinfo/Portugal
+    dest: /etc/localtime
+    state: link
+    force: yes
+
+# Copy Backup File
+- name: "Copy Backup File"
+  copy:
+    src: backup.tar.xz
+    dest: /tmp/backup.tar.xz
+
+# Copy Template
+- name: "Copy Template"
+  template:
+    src: motd
+    dest: /etc/motd
+    force: yes
+    owner: root
+    group: root
+
+# Reboot Targets
+- name: "Reboot Targets"
+  reboot:
+  notify: "Notify Post Reboot"
+...
