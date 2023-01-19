@@ -1,9 +1,7 @@
-### INCOMPLETE
-# WORKS WELL ON RH DISTRIBUTION
-# MISSING DEBIAN AND UBUNTU DIST
+### DONE
 ---
-- hosts: fedora
-  remote_user: andre
+- name: "Install Nginx And Httpd On RH Dist Like"
+  hosts: fedora
   become: yes
   become_user: root
   tasks:
