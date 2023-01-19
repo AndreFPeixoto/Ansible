@@ -1,3 +1,6 @@
+### INCOMPLETE
+# WORKS WELL ON RH DISTRIBUTION
+# MISSING DEBIAN AND UBUNTU DIST
 ---
 - hosts: fedora
   remote_user: andre

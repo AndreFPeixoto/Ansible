@@ -1,5 +1,6 @@
+### DONE
 ---
-- name: "Ansible Playbook"
+- name: "Connection Test With All Hosts"
   hosts: all
   tasks:
     - name: "Test Ping On Linux"

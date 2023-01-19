@@ -1,3 +1,5 @@
+### UNCHECKED
+# WORKS ONLY ON RH DIST
 ---
 - hosts: fedora
   remote_user: andre

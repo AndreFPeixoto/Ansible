@@ -1,3 +1,7 @@
+### INCOMPLETE
+# WORKS ONLY ON RH DISTRIBUTION
+# MISSING APT PM
+# MISSING CONFIGURATION
 ---
 - name: "Configure NTP"
   hosts: linux_hosts

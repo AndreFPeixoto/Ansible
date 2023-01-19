@@ -1,3 +1,5 @@
+### UNCHECKED
+# PROBABLY DOES NOT WORK BECAUSE MISSING VAULT
 ---
 - name: "Vault Playbook"
   hosts: myinstance
