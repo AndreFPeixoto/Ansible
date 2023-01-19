@@ -4,21 +4,19 @@
   hosts: linux_hosts
   vars:
     - users:
-      - user01:
-          name: "user01"
-          password: "qweASDzxc"
+      - user01: "user01"
     - file: user_created_date.txt
   tasks:
     - name: "Create a new user"
       user:
-        name: "{{ item.name }}"
-        password: "{{ item.password }}"
+        name: "{{ item }}"
+        password: "{{ item }}"
       loop: "{{ users }}"
     - name: "Create file in users home"
       copy:
-        dest: "/home/{{ item.name }}/{{ file }}"
-        owner: "{{ item.name }}"
-        group: "{{ item.name }}"
+        dest: "/home/{{ item }}/{{ file }}"
+        owner: "{{ item }}"
+        group: "{{ item }}"
         mode: 0644
         content: "{{ ansible_date_time.iso8601 }}"
       loop: "{{ users }}"
