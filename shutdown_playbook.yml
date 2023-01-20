@@ -5,5 +5,4 @@
   tasks:
     - name: "Shutdown Machines"
       community.general.shutdown:
-        msg: "Shutdown initialized by Ansible Controller"
 ...
