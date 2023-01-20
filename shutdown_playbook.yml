@@ -1,0 +1,9 @@
+### DONE
+---
+- name: "Shutdown All Hosts"
+  hosts: all
+  tasks:
+    - name: "Shutdown Machines"
+      shutdown:
+        msg: "Shutdown initialized by Ansible Controller"
+...
