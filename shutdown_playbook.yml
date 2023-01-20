@@ -4,6 +4,6 @@
   hosts: all
   tasks:
     - name: "Shutdown Machines"
-      shutdown:
+      community.general.shutdown:
         msg: "Shutdown initialized by Ansible Controller"
 ...
