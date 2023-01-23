@@ -1,38 +1,14 @@
 ---
 
-- name: "Install packages"
-  yum:
-    name: "{{ item }}"
+- name: "PACKAGE | Install Required Packages"
+  package:
+    name:
+      - software-properties-common
+      - dirmngr
+      - python-mysqldb
+      - python3-mysqldb
+      - python-apt
+      - python3-apt
     state: latest
-  loop: 
-    - mariadb-server
-    - python3-PyMySQL
-
-- name: "Set root password"
-  ini_file:
-    path: "/root/.my.cnf"
-    section: client
-    option: "{{ item.option }}"
-    value: "{{ item.value }}"
-  loop:
-    - { option: user, value: root }
-    - { option: password, value: "{{ mysql_root_password }}" }
-
-- name: "Start and enable mysql(mariadb) service"
-  service:
-    name: mariadb
-    state: restarted
-    enabled: yes
-
-- name: "Create a database"
-  mysql_db:
-    name: "{{ mysql_database }}"
-    state: present
-
-- name: "Create users"
-  include_tasks: create_mariadb_user.yml
-  loop: "{{ mysql_users }}"
-  loop_control:
-    loop_var: user
 
 ...
