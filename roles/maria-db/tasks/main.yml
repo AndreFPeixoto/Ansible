@@ -1,8 +1,11 @@
 ---
-- name: "Install mariadb-server"
+- name: "Install packages"
   yum:
-    name: "mariadb-server"
+    name: "{{ item }}"
     state: latest
+  loop: 
+    - mariadb-server
+    - python3-pymysql
 - name: "Start and enable mysql(mariadb) service"
   service:
     name: mariadb
