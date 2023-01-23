@@ -8,13 +8,21 @@
       - python3-apt
     state: latest
 
-- name: "PACKAGE | Update Cache"
-  package:
-    update_cache=yes
-
 - name: "PACKAGE | Update System"
   package:
     name: "*"
     state: latest
+
+- name: "PACKAGE | Install MariaDB"
+  package:
+    name: mariadb-server
+    state: latest
+
+- name: "SYSTEM | Restart MariaDB"
+  system:
+    name: mariadb
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
 
 ...
