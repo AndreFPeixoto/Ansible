@@ -8,26 +8,13 @@
     - mariadb-server
     - python3-PyMySQL
 
-- name: create /root/.my.cnf with password credentials
-  blockinfile:
-    path: /root/.my.cnf
-    block: |
-      [client]
-      user=root
-      password={{ mysql_root_password }}
-
-      [mysql]
-      user=root
-      password={{ mysql_root_password }}
-
-      [mysqldump]
-      user=root
-      password={{ mysql_root_password }}
-
-      [mysqldiff]
-      user=root
-      password={{ mysql_root_password }}
-    create: yes
+- name: "Set root password"
+  ini_file:
+    path: "/etc/my.cnf"
+    section: client
+    value: 
+      user: root
+      password: "{{ mysql_root_password }}"
 
 - name: "Start and enable mysql(mariadb) service"
   service:
@@ -40,7 +27,7 @@
     name: "{{ mysql_database }}"
     state: present
     login_user: root
-    login_password: ''
+    login_password: "{{ mysql_root_password }}"
 
 - name: "Create users"
   include_tasks: create_mariadb_user.yml
