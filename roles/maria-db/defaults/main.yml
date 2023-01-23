@@ -4,3 +4,5 @@ mysql_database: "testrole01"
 mysql_users:
   - test01
   - test02
+
+mysql_root_password: "123Qwe456"

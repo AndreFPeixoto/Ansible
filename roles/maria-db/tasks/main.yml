@@ -8,6 +8,14 @@
     - mariadb-server
     - python3-PyMySQL
 
+- name: "Reset Root Password"
+  mysql_user:
+    login_user: root
+    login_password: ''
+    name: root
+    host_all: yes
+    password: "{{ mysql_root_password }}"
+
 - name: "Start and enable mysql(mariadb) service"
   service:
     name: mariadb

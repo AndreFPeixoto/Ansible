@@ -47,7 +47,7 @@
         name: "{{ mysql_user }}"
         password: "{{ mysql_pass }}"
         host: "{{ mysql_client_ip }}"
-        priv: "{{ db }}.*": "READ,WRITE"
+        priv: "{{ db }}.*:READ,WRITE"
       loop: "{{ mysql_db }}"
       loop_control:
         loop_var: db
