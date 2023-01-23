@@ -1,2 +1,11 @@
 ---
-# tasks file for maria-db
+- name: "Install mariadb-server"
+  yum:
+    name: "mariadb-server"
+    state: latest
+- name: "Start and enable mysql service"
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+...

@@ -1,13 +1,6 @@
-### DONE
+### ERROR
 ---
 - name: "Shutdown All Hosts"
   hosts: all
-  ignore_unreachable: yes
   tasks:
-    - name: "Shutdown Linux Hosts"
-      command: "shutdown now"
-      when: ansible_facts['system'] == "Linux"
-    - name: "Shutdown Windows Hosts"
-      win_command: "powershell.exe Stop-Computer"
-      when: ansible_facts['os_family'] == "Windows"
 ...

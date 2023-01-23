@@ -3,5 +3,6 @@
 - name: "Default Playbook - Using Roles"
   hosts: all
   roles:
-    - common
+#    - common
+    - maria-db    
 ...
