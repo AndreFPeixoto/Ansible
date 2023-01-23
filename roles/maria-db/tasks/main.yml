@@ -18,6 +18,19 @@
     name: mariadb-server
     state: latest
 
+- name: "MYSQL | Update Root Password"
+  mysql_user:
+    name: root
+    password: "{{ root_password }}"
+    priv: "*.*:ALL"
+    host: $item
+    login_user: root
+    login_password: ''
+  loop: 
+    - 127.0.0.1
+    - localhost
+    - ::1
+
 - name: "SERVICE | Restart MariaDB"
   service:
     name: mariadb
@@ -26,7 +39,6 @@
     daemon_reload: yes
 
 - name: "MYSQL | Create New Database"
-  become: yes
   mysql_db:
     name: "{{ db_name }}"
     state: present
