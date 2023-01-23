@@ -5,7 +5,7 @@
     state: latest
   loop: 
     - mariadb-server
-    - PyMySQL
+    - python3-PyMySQL
 - name: "Start and enable mysql(mariadb) service"
   service:
     name: mariadb
