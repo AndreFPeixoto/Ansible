@@ -18,8 +18,8 @@
     name: mariadb-server
     state: latest
 
-- name: "SYSTEM | Restart MariaDB"
-  system:
+- name: "SERVICE | Restart MariaDB"
+  service:
     name: mariadb
     state: restarted
     enabled: yes
