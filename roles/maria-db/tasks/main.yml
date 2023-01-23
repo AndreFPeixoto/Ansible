@@ -23,12 +23,6 @@
   register: is_root_password_set
   ignore_errors: yes
 
-- name: Delete anonymous users
-  mysql_user:
-    user=""
-    state="absent"
-  when: is_root_password_set.rc == 0
-
 - name: Set root password
   mysql_user:
     user=root
