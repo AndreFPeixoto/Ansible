@@ -1,2 +1,6 @@
 ---
 mysql_database: "testrole01"
+
+mysql_users:
+  - test01
+  - test02

@@ -1,3 +1,16 @@
 ---
 
+- name: "Create db name after user"
+  mysql_db:
+    name: "{{ user }}_db"
+    state: present
+
+- name: "Add users to database"
+  mysql_users:
+    name: "{{ user }}"
+    password: "123qwe"
+    priv: "{{ mysql_database }}.*:ALL/{{ user }}.*:ALL"
+    host: "{{ ansible_host }}"
+    state: present
+
 ...
