@@ -1,7 +1,7 @@
 ### UNCHECKED
 ---
 - name: "Default Playbook - Using Roles"
-  hosts: all
+  hosts: fedora
   roles:
 #    - common
     - maria-db    
