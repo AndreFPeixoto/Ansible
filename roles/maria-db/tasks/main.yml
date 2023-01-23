@@ -3,12 +3,18 @@
 - name: "PACKAGE | Install Required Packages"
   package:
     name:
-      - software-properties-common
       - dirmngr
-      - python-mysqldb
-      - python3-mysqldb
       - python-apt
       - python3-apt
+    state: latest
+
+- name: "PACKAGE | Update Cache"
+  package:
+    update_cache=yes
+
+- name: "PACKAGE | Update System"
+  package:
+    name: "*"
     state: latest
 
 ...
