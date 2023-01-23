@@ -2,7 +2,13 @@
 ---
 - name: "Shutdown All Hosts"
   hosts: all
+  gather_facts: no
+  ignore_unreachable: yes
   tasks:
-    - name: "Shutdown Machines"
+    - name: "Shutdown Linux Hosts"
       command: "shutdown now"
+      when: ansible_facts['system'] == "Linux"
+    - name: "Shutdown Linux Hosts"
+      win_command: "powershell.exe Stop-Computer"
+      when: ansible_facts['os_family'] == "Windows"
 ...
