@@ -25,4 +25,11 @@
     enabled: yes
     daemon_reload: yes
 
+- name: "MYSQL | Create New Database"
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+    login_user: root
+    login_password: ''
+
 ...
