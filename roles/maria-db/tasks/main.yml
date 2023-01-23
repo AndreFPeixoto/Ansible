@@ -10,7 +10,7 @@
 
 - name: "Set root password"
   ini_file:
-    path: "/etc/my.cnf"
+    path: "/root/.my.cnf"
     section: client
     option: "{{ item.option }}"
     value: "{{ item.value }}"
