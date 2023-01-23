@@ -14,9 +14,9 @@
     section: client
     option: "{{ item.option }}"
     value: "{{ item.value }}}"
-    loop:
-      - { option: user, value: root }
-      - { option: password, value: 123Qwe456 }
+  loop:
+    - { option: user, value: root }
+    - { option: password, value: "{{ mysql_root_password }}" }
 
 - name: "Start and enable mysql(mariadb) service"
   service:
