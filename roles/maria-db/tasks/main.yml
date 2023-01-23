@@ -13,7 +13,7 @@
     path: "/etc/my.cnf"
     section: client
     option: "{{ item.option }}"
-    value: "{{ item.value }}}"
+    value: "{{ item.value }}"
   loop:
     - { option: user, value: root }
     - { option: password, value: "{{ mysql_root_password }}" }
