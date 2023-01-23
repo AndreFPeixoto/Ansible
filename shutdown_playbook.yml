@@ -4,5 +4,5 @@
   hosts: all
   tasks:
     - name: "Shutdown Machines"
-      community.general.shutdown:
+      command: "shutdown now"
 ...
