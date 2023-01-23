@@ -3,9 +3,16 @@
   yum:
     name: "mariadb-server"
     state: latest
-- name: "Start and enable mysql service"
+- name: "Start and enable mysql(mariadb) service"
   service:
-    name: mysql
+    name: mariadb
     state: started
     enabled: yes
+- name: "Test debug mysql database"
+  debug:
+    msg: "{{ mysql_database }}"
+- name: "Create a database"
+  mysql_db:
+    name: "{{ mysql_database }}"
+    state: present
 ...
