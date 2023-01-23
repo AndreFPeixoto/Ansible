@@ -12,9 +12,11 @@
   ini_file:
     path: "/etc/my.cnf"
     section: client
-    value: 
-      user: root
-      password: "{{ mysql_root_password }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}}"
+    loop:
+      - { option: user, value: root }
+      - { option: password, value: {{ mysql_root_password }} }
 
 - name: "Start and enable mysql(mariadb) service"
   service:
