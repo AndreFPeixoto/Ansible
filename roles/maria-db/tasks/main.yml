@@ -16,7 +16,7 @@
     value: "{{ item.value }}}"
     loop:
       - { option: user, value: root }
-      - { option: password, value: "{{ mysql_root_password }}" }
+      - { option: password, value: 123Qwe456 }
 
 - name: "Start and enable mysql(mariadb) service"
   service:
