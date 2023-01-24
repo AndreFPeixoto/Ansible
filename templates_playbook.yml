@@ -1,0 +1,35 @@
+---
+- name: "Templates Playbook"
+  hosts: fedora
+  vars:
+    - http_ports:
+      - 80
+      - 81
+      - 8008
+      - 9000
+  tasks:
+    - name: "Install Httpd"
+      package:
+        name: httpd
+        state: latest
+    - name: "Create Folders"
+      file:
+        path: "/var/www/html/ansible-service-{{ item }}"
+        state: directory
+      loop: "{{ http_ports }}"
+    - name: "Copy Html Template"
+      template:
+        src: /assets/templates/index.html.j2
+        dest: "/var/www/html/ansible-service-{{ port }}/index.html"
+      loop: "{{ http_ports }}"
+      loop_control:
+        loop_var: port
+    - name: "Copy Configuration Template"
+      template:
+        src: /assets/templates/httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+    - name: "Restart Httpd"
+      service:
+        name: httpd
+        state: restarted
+...
