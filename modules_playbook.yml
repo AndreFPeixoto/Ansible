@@ -9,22 +9,19 @@
       register: module_output
     - name: "Display Module Output #1"
       debug:
-        msg: module_output.stdout
-      when: module_output is changed
+        var: module_output
     - name: "Run Module #2"
       my_first_module:
         name: Peter
       register: module_output
     - name: "Display Module Output #2"
       debug:
-        msg: module_output.stdout
-      when: module_output is changed
+        var: module_output
     - name: "Run Module #3"
       my_first_module:
         name: Fail
       register: module_output
     - name: "Display Module Output #3"
       debug:
-        msg: module_output.stdout
-      when: module_output is changed
+        var: module_output
 ...
