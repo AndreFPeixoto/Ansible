@@ -1,8 +1,5 @@
-#!/usr/bin/python
-# Copyright: (c) 2018, Terry Jones <terry.jones@example.org>
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
-
 from ansible.module_utils.basic import AnsibleModule
+
 ANSIBLE_METADATA = {
     'metadata_version': '1.0',
     'status': ['preview'],
@@ -11,7 +8,7 @@ ANSIBLE_METADATA = {
 
 DOCUMENTATION = '''
 ---
-module: << INTRODUCE MODULE NAME >>
+module: first_module
 short_description: This is my first module
 version_added: "2.9"
 description:
@@ -21,9 +18,11 @@ options:
         description:
         - This is the name of the person who can perform an action
         required: true
-    << INTRODUCE ACTION OPTION>>
+    action:
+        description:
+        - Test argument
 author:
-    - << INTRODUCE AUTHOR NAME >>
+    - André Peixoto
 '''
 
 EXAMPLES = '''
@@ -56,7 +55,7 @@ def run_module():
     # define available arguments/parameters a user can pass to the module
     module_args = dict(
         name=dict(type='str', required=True),
-        << INTRODUCE ACTION ARGUMENT >>
+        action=dict(type='str', required=False, default="Talk")
     )
 
     # seed the result dict in the object
@@ -65,7 +64,7 @@ def run_module():
     # state will include any data that you want your module to pass back
     # for consumption, for example, in a subsequent task
     result = dict(
-        << DEFINE CHANGE STATE >>
+        changed=True,
         original_message=[],
         message=''
     )
@@ -87,9 +86,9 @@ def run_module():
 
     # manipulate or modify the state as needed (this is going to be the
     # part where your module will do what it needs to do)
-    << APPEND TO 'original_message' NAME ARGUMENT >>
-    << APPEND TO 'original_message' ACTION ARGUMENT >>
-    << DEFINE TEXT 'message' >>
+    result['original_message'].append(module.params['name'])
+    result['original_message'].append(module.params['action'])
+    result['message'] = "{} would like to {}".format(module.params['name'], module.params['action'])
 
     # during the execution of the module, if there is an exception or a
     # conditional state that effectively causes a failure, run
